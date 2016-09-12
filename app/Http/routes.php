@@ -14,7 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('home', array('as' => 'home', 'uses' => function(){
+    return view('home');
+}));
 Route::controllers([
     'auth' =>'Auth\AuthController',
     'password' =>'Auth\PasswordController'
