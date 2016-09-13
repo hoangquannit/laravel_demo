@@ -12,7 +12,6 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="{{url('auth/facebook')}}"> Sign facebook</a></li>
                 <li><a class="navbar-brand" href="{{url('auth/login')}}"> Sign In</a></li>
                 <li><a class="navbar-brand" href="{{url('auth/register')}}"> Sign Up</a></li>
             </ul>

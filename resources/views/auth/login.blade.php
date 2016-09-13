@@ -6,7 +6,19 @@
             <div class="card card-container">
                 <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                 <p id="profile-name" class="profile-name-card"></p>
-                <form method="POST" action={{url('/auth/login')}}>
+                <h4>Please Log In</h4>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <a href="{{url('auth/facebook')}}" class="btn btn-lg btn-primary btn-block">Facebook</a>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <a href="{{url('auth/google')}}" class="btn btn-lg btn-info btn-block">Google+</a>
+                    </div>
+                </div>
+                <div class="login-or">
+                    <hr class="hr-or">
+                </div>
+                <form role="form" method="POST" action={{url('/auth/login')}}>
                     {!! csrf_field() !!}
                     @if ($errors->any())
                         <ul>
