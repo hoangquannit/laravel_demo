@@ -83,6 +83,15 @@ class AuthController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProviderGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
     /**
      * Obtain the user information from Facebook.
@@ -105,23 +114,43 @@ class AuthController extends Controller
     }
 
     /**
+     * Obtain the user information from Google.
+     *
+     * @return Response
+     */
+    public function handleProviderGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+        } catch (Exception $e) {
+            return redirect('auth/google');
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+
+        Auth::login($authUser, true);
+
+        return redirect()->route('home');
+    }
+
+    /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $facebookUser
+     * @param $socialUser
      * @return User
      */
-    private function findOrCreateUser($facebookUser)
+    private function findOrCreateUser($socialUser)
     {
-        $authUser = User::where('facebook_id', $facebookUser->id)->first();
+        $authUser = User::where('social_id', $socialUser->id)->first();
 
         if ($authUser){
             return $authUser;
         }
         return User::create([
-            'name' => $facebookUser->name,
-            'email' => $facebookUser->email,
-            'facebook_id' => $facebookUser->id,
-            'avatar' => $facebookUser->avatar,
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'social_id' => $socialUser->id,
+            'avatar' => $socialUser->avatar,
         ]);
     }
 }

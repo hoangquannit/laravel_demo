@@ -16,10 +16,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('facebook_id');
+            $table->string('social_id');
             $table->string('avatar');
             $table->string('password');
-            $table->boolean('admin_confirm');
+            $table->boolean('role');
             $table->rememberToken();
             $table->timestamps();
         });

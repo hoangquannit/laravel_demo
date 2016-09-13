@@ -16,6 +16,10 @@ Route::get('/', function () {
 });
 Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth/google', 'Auth\AuthController@redirectToProviderGoogle');
+Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogleCallback');
+
+
 Route::get('home', array('as' => 'home', 'uses' => function(){
     return view('home');
 }));
